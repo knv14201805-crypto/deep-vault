@@ -1,0 +1,120 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#070b08">
+<meta name="description" content="DEEP VAULT — Privacy Browser">
+<link rel="manifest" href="/manifest.json">
+<title>DEEP VAULT</title>
+<style>
+*{box-sizing:border-box}
+body{
+ margin:0;background:#070b08;color:#eaffed;
+ font-family:Arial,sans-serif;min-height:100vh;
+}
+header{padding:24px 20px;border-bottom:1px solid #203b25}
+.logo{font-size:25px;font-weight:900;letter-spacing:3px}
+.logo span{color:#9dff45}
+.status{color:#9dff45;font-size:10px;letter-spacing:2px;margin-top:7px}
+main{padding:25px 18px;max-width:650px;margin:auto}
+h1{font-size:30px;margin:20px 0 5px}
+.green{color:#9dff45}
+.sub{color:#829287;font-size:13px}
+.search{
+ display:flex;gap:8px;margin:25px 0;
+}
+input{
+ flex:1;min-width:0;background:#111b13;
+ border:1px solid #36513a;border-radius:12px;
+ padding:16px;color:white;font-size:14px;
+}
+button{
+ background:#9dff45;color:#071007;border:0;
+ border-radius:10px;padding:0 17px;font-weight:bold;
+}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.card{
+ background:#111a13;border:1px solid #253c29;
+ border-radius:14px;padding:18px;min-height:110px;
+}
+.card b{display:block;margin-bottom:9px}
+.card p{font-size:12px;color:#829287;line-height:1.5}
+.icon{font-size:22px;color:#9dff45}
+.section{margin-top:28px}
+.section h2{font-size:15px;letter-spacing:2px}
+button:active{opacity:.7}
+footer{text-align:center;color:#536258;font-size:10px;padding:35px}
+</style>
+</head>
+<body>
+<header>
+ <div class="logo">DEEP <span>VAULT</span></div>
+ <div class="status">● PRIVACY INTERFACE · V0.1</div>
+</header>
+<main>
+ <h1>ENTER THE <span class="green">VAULT.</span></h1>
+ <p class="sub">Your privacy. Your control.</p>
+
+ <div class="search">
+  <input id="search" placeholder="Search or enter website..."
+   onkeydown="if(event.key==='Enter')go()">
+  <button onclick="go()">GO</button>
+ </div>
+
+ <div class="section">
+  <h2>VAULT MODULES</h2>
+  <div class="grid">
+   <div class="card">
+    <div class="icon">◆</div>
+    <b>Privacy Shield</b>
+    <p>Privacy settings and protection status.</p>
+   </div>
+   <div class="card">
+    <div class="icon">⌘</div>
+    <b>Safe Terminal</b>
+    <p>Demo command interface.</p>
+   </div>
+   <div class="card">
+    <div class="icon">◈</div>
+    <b>VPN Connect</b>
+    <p>VPN integration coming soon.</p>
+   </div>
+   <div class="card">
+    <div class="icon">✧</div>
+    <b>Vault AI</b>
+    <p>Private AI assistant interface.</p>
+   </div>
+  </div>
+ </div>
+
+ <div class="section">
+  <h2>SYSTEM STATUS</h2>
+  <div class="card">
+   <b class="green">INTERFACE ONLINE</b>
+   <p>DEEP VAULT web prototype is running.</p>
+   <p>VPN: NOT CONNECTED</p>
+   <p>Proxy: NOT CONFIGURED</p>
+  </div>
+ </div>
+</main>
+<footer>DEEP VAULT · PRIVACY FIRST · 2026</footer>
+
+<script>
+function go(){
+ const value=document.getElementById('search').value.trim();
+ if(!value)return;
+ const url=/^https?:\/\//i.test(value)?value:
+ /^[\w-]+\.[a-z]{2,}/i.test(value)?'https://'+value:
+ 'https://duckduckgo.com/?q='+encodeURIComponent(value);
+ window.open(url,'_blank','noopener');
+}
+if('serviceWorker' in navigator){
+ window.addEventListener('load',()=>{
+  navigator.serviceWorker.register('/sw.js').catch(console.error);
+ });
+}
+</script>
+</body>
+</html>
